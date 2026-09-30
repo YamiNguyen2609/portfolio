@@ -1,0 +1,180 @@
+/* This page IS the printable document - screen styling only adds a
+   "paper on a desk" preview. @page (globals.css) handles per-page print
+   margins; .sheet padding handles the on-screen preview margins. */
+.page {
+  --ink: #1a1c1e;
+  --ink-soft: #4a5054;
+  --ink-faint: #7c8388;
+  --line: #cfe2f3;
+  --accent: #16537e;
+  --accent-tint: #eaf5f1;
+  --paper: #ffffff;
+  --backdrop: #e9ebea;
+
+  min-height: 100vh;
+  background: var(--backdrop);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.5;
+}
+.page h1, .page h2, .page h3, .page p { margin: 0; }
+.page ul { margin: 0; padding: 0; list-style: none; }
+.page svg { flex-shrink: 0; }
+.page a { color: var(--accent); text-decoration: none; }
+.page a:hover { text-decoration: underline; }
+
+/* ---------- Toolbar (screen only) ---------- */
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.7rem 1rem;
+  background: var(--ink);
+  color: #dfe2e1;
+  font-size: 0.82rem;
+}
+.page .back { color: #dfe2e1; font-weight: 600; }
+.printBtn {
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--ink);
+  background: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.45rem 0.9rem;
+  cursor: pointer;
+}
+.printBtn:hover { background: var(--accent-tint); }
+.printBtn:active { transform: translateY(1px); }
+
+/* ---------- Sheet (the A4 page) ---------- */
+.sheet {
+  background: var(--paper);
+  width: 210mm;
+  min-height: 297mm;
+  margin: 22px auto 60px;
+  padding: 10mm;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* ---------- Header ---------- */
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-bottom: 14px;
+  border-bottom: 2px solid #073763;
+  margin-bottom: 20px;
+}
+.name { font-size: 26px; font-weight: 700; letter-spacing: -0.01em; text-transform: uppercase; }
+.title { color: var(--accent); font-size: 14px; font-weight: 600; margin-top: 2px; }
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  text-align: right;
+}
+.contact li { display: flex; align-items: center; justify-content: flex-end; gap: 6px; }
+.contact svg { color: var(--accent); }
+.page .contact a { color: var(--ink-soft); }
+
+/* ---------- Sections ---------- */
+.section { margin-bottom: 18px; }
+.section:last-child { margin-bottom: 0; }
+.section h2 {
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+  break-after: avoid;
+}
+.summary { font-size: 13px; color: var(--ink-soft); text-align: justify; }
+.label { font-weight: 600; color: var(--ink); }
+.muted { color: var(--ink-faint); }
+
+/* ---------- Education ---------- */
+.edu { break-inside: avoid; }
+.eduSchool { font-size: 13.5px; font-weight: 700; margin-bottom: 3px; }
+.eduLine { font-size: 13px; color: var(--ink-soft); margin-bottom: 2px; }
+
+/* ---------- Skills ---------- */
+.skills { break-inside: avoid; }
+.skillRow {
+  display: flex;
+  gap: 10px;
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  padding: 6px 0;
+  border-bottom: 1px solid var(--line);
+}
+.skillRow:last-child { border-bottom: none; }
+.skillLabel { flex: 0 0 190px; font-weight: 600; color: var(--ink); }
+
+/* ---------- Experience ---------- */
+.job { margin-bottom: 14px; break-inside: avoid; }
+.job:last-child { margin-bottom: 0; }
+.jobHeader { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 6px; }
+.jobCompany { font-size: 13.5px; font-weight: 700; text-transform: uppercase; }
+.jobDates { font-size: 12px; font-weight: 600; color: var(--accent); white-space: nowrap; }
+
+.project { padding-left: 12px; border-left: 2px solid var(--line); margin-top: 8px; break-inside: avoid; }
+.projectTitle { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+.projectTech { font-size: 12px; color: var(--ink-soft); margin-bottom: 3px; }
+.projectTech .label { color: var(--ink-soft); font-weight: 700; }
+.projectList { margin-top: 4px; }
+.projectList li {
+  position: relative;
+  padding-left: 12px;
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  margin-bottom: 3px;
+  text-align: justify;
+}
+.projectList li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--ink-faint);
+}
+.projectList li:last-child { margin-bottom: 0; }
+
+/* ---------- Responsive (screen) ---------- */
+@media (max-width: 860px) {
+  .sheet { width: 100%; min-height: 0; margin: 0; padding: 24px 20px; box-shadow: none; }
+  .toolbar { flex-direction: column; gap: 0.4rem; text-align: center; }
+}
+@media (max-width: 520px) {
+  .head { flex-direction: column; }
+  .contact { align-items: flex-start; text-align: left; }
+  .contact li { justify-content: flex-start; }
+  .jobHeader { flex-direction: column; gap: 2px; }
+  .skillRow { flex-direction: column; gap: 1px; }
+  .skillLabel { flex: none; }
+}
+
+/* ---------- Print ---------- */
+@media print {
+  .toolbar { display: none; }
+  .page { background: #ffffff; min-height: 0; }
+  .sheet { width: auto; min-height: 0; margin: 0; padding: 0; box-shadow: none; }
+  .section, .job, .project, .edu, .skills { break-inside: avoid; }
+  .section h2 { break-after: avoid; }
+}
