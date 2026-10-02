@@ -1,3 +1,6 @@
+import type { StaticImageData } from "next/image";
+import avatarImage from "./images/chibi-avatar.png";
+
 // Single source of truth for the portfolio (/) and the printable CV (/cv).
 
 export const contact = {
@@ -7,16 +10,14 @@ export const contact = {
   email: "truongthuan2609@gmail.com",
   phone: "+84 938 761 194",
   phoneHref: "tel:+84938761194",
-  // Put a photo in /public (e.g. /avatar.jpg) and set its path here.
-  avatar: null as string | null,
+  // Set to null to fall back to the "NT" initials.
+  avatar: avatarImage as StaticImageData | null,
   location: "Binh Tan, Ho Chi Minh City",
   cvLocation: "Ho Chi Minh City, Vietnam",
   // Replace "#" with your real profile URLs.
   socials: [
-    { label: "GH", title: "GitHub", href: "#" },
-    { label: "in", title: "LinkedIn", href: "#" },
-    { label: "fb", title: "Facebook", href: "#" },
-    { label: "Zalo", title: "Zalo", href: "#" },
+    { label: "GITHUB", title: "GitHub", href: "https://github.com/YamiNguyen2609", color: "#FFF", background: "#181717" },
+    { label: "LINKEDIN", title: "LinkedIn", href: "https://www.linkedin.com/in/nguyen-truong-thuan/", color: "#FFF", background: "#0077B5" },
   ],
 };
 
@@ -42,28 +43,28 @@ const ABBR: Record<string, string> = {
 export const abbr = (name: string) =>
   ABBR[name] ?? name.replace(/[^A-Za-z]/g, "").slice(0, 2);
 
-export type Variant = "light" | "dark" | "mid";
+export type Variant = "featured" | "plain" | "tint";
 
 export const services: { icon: string; title: string; body: string; variant: Variant }[] = [
-  { icon: ".N", title: "Enterprise .NET maintenance", body: "Fixes, features and incident response for ASP.NET MVC / Web API platforms.", variant: "light" },
-  { icon: "⇄", title: "Integrations & automation", body: "CRM pipelines, Selenium robots and third-party SDKs that remove manual work.", variant: "dark" },
-  { icon: "▦", title: "Business systems & BI", body: "HR, education and budget platforms with SQL Server and Sisense reporting.", variant: "dark" },
-  { icon: "RN", title: "Mobile field apps", body: "React Native apps for couriers and warehouses — scanning, photos, live location.", variant: "mid" },
+  { icon: ".N", title: "Development & maintenance", body: "Fixes, features, and incident resolutions for legacy ASP.NET MVC applications and Web API platforms.", variant: "plain" },
+  { icon: "⇄", title: "Integrations & automation", body: "Selenium robots and third-party SDKs that remove manual work.", variant: "plain" },
+  { icon: "▦", title: "Business systems & BI", body: "HR, education, and marketing platforms with SQL Server and Sisense reporting.", variant: "plain" },
+  { icon: "RN", title: "Mobile field apps", body: "React Native apps for couriers and warehouses — scanning, photos, live location.", variant: "plain" },
 ];
 
 export const jobs = [
-  { company: "Global Vertical Innovations, LLC", dates: "May 2022 — Present", projects: "TDC Legacy / IX-One · Cortex", dot: "#bcccdc", current: true },
-  { company: "SB&P Logistics", dates: "Dec 2019 — Mar 2022", projects: "Billing Retrieval · Courier & Warehouse apps · HRMS", dot: "#829ab1", current: false },
-  { company: "AdwardSoft", dates: "Jan 2019 — Dec 2019", projects: "CSI Center Management", dot: "#486581", current: false },
+  { company: "Global Vertical Innovations, LLC", dates: "May 2022 — Present", projects: "TDC Legacy / IX-One · Cortex", current: true },
+  { company: "SB&P Logistics", dates: "Dec 2019 — Mar 2022", projects: "Billing Retrieval · Courier & Warehouse apps · HRMS", current: false },
+  { company: "AdwardSoft", dates: "Jan 2019 — Dec 2019", projects: "CSI Center Management", current: false },
 ];
 
 export const skillGroups = [
-  { label: "LANGUAGES", color: "#bcccdc", ink: "#102a43", items: ["C#", "JavaScript", "TypeScript", "Python", "Dart"] },
-  { label: "FRAMEWORKS", color: "#486581", ink: "#f0f4f8", items: [".NET", "React", "React Native", "Sencha ExtJS", "Flutter", "Node.js", "Yii2", "Odoo"] },
-  { label: "DATA & ORM", color: "#829ab1", ink: "#102a43", items: ["MS SQL Server", "PostgreSQL", "MongoDB", "Entity Framework", "Dapper"] },
-  { label: "CLOUD, SERVERS & DELIVERY", color: "#f0f4f8", ink: "#102a43", items: ["Microsoft Azure", "IIS", "Apache", "Git", "SVN", "FTP", "Bitbucket Pipelines"] },
-  { label: "INTEGRATIONS & SDKS", color: "#486581", ink: "#f0f4f8", items: ["Formstack", "Splendid CRM", "Workfront", "Selenium", "Google SDK", "Telegram SDK", "MQTT", "Sisense"] },
-  { label: "TOOLS & WAY OF WORKING", color: "#829ab1", ink: "#102a43", items: ["Visual Studio", "VS Code", "Android Studio", "Claude Code", "Cursor", "Antigravity", "Agile / Scrum"] },
+  { label: "LANGUAGES", tone: "soft" as const, items: ["C#", "JavaScript", "TypeScript", "Python"] },
+  { label: "FRAMEWORKS", tone: "solid" as const, items: [".NET", "React", "React Native", "Sencha ExtJS", "Node.js", "Yii2", "Odoo"] },
+  { label: "DATA & ORM", tone: "neutral" as const, items: ["MS SQL Server", "PostgreSQL", "MongoDB", "Entity Framework", "Dapper"] },
+  { label: "CLOUD, SERVERS & DELIVERY", tone: "soft" as const, items: ["Microsoft Azure", "IIS", "Apache", "Git", "SVN", "FTP", "Bitbucket Pipelines"] },
+  { label: "INTEGRATIONS & SDKS", tone: "solid" as const, items: ["Formstack", "Splendid CRM", "Workfront", "Selenium", "Google SDK", "Telegram SDK", "MQTT", "Sisense"] },
+  { label: "TOOLS & WAY OF WORKING", tone: "neutral" as const, items: ["Visual Studio", "VS Code", "Android Studio", "Claude", "Cursor", "Antigravity", "Agile / Scrum"] },
 ];
 
 export const projects = [

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { abbr, contact, jobs, projects, services, skillGroups } from "@/data/profile";
@@ -34,12 +35,12 @@ export default function Portfolio() {
       <aside className={s.side}>
         <div className={s.avatarRing}>
           {contact.avatar ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={contact.avatar} alt={contact.name} className={s.avatar} />
+            <div className={s.avatar}>
+              <Image src={contact.avatar} alt={contact.name} className={s.avatarImg} sizes="136px" priority />
+            </div>
           ) : (
             <div className={s.avatar}>NT</div>
           )}
-          <span className={s.status} />
         </div>
 
         <div className={s.identity}>
@@ -80,7 +81,7 @@ export default function Portfolio() {
 
         <div className={s.socials}>
           {contact.socials.map((x) => (
-            <a key={x.title} href={x.href} title={x.title} className={s.social}>
+            <a key={x.title} href={x.href} title={x.title} className={s.social} style={{ color: x.color, background: x.background }}>
               {x.label}
             </a>
           ))}
@@ -88,8 +89,12 @@ export default function Portfolio() {
       </aside>
 
       <main className={s.main}>
+        <div className={s.topbar}>
+          <div className={`${s.pageTitle} ${visible ? "" : s.hidden}`}>
+            <h2 className={s.pageName}>{TABS[tab]}</h2>
+          </div>
         <div className={s.tabs} role="tablist">
-          <span className={s.pill} style={{ left: `calc(5px + (100% - 10px) / 3 * ${tab})` }} />
+          <span className={s.pill} style={{ transform: `translateX(${tab * 100}%)` }} />
           {TABS.map((label, i) => (
             <button
               key={label}
@@ -101,6 +106,7 @@ export default function Portfolio() {
               {label}
             </button>
           ))}
+        </div>
         </div>
 
         <div className={s.card}>
@@ -114,9 +120,7 @@ export default function Portfolio() {
                     I keep enterprise .NET systems <span className={s.mark}>running</span> — and make them better.
                   </h2>
                   <p className={s.lead}>
-                    5+ years in design, software development, support and system administration. I’ve delivered
-                    software and web projects for clients of different scales — logistics, HR, education and B2B
-                    retail — in C#, JavaScript, Python and Dart. My motto: <strong>never give up.</strong>
+                    7+ years in design, software development, support and system administration. I’ve delivered software and web projects for clients of different scales — logistics, HR, education and B2B retail — in C#, JavaScript, Python and Dart. <br/>My motto: <strong>never give up.</strong>
                   </p>
                 </section>
 
@@ -125,7 +129,6 @@ export default function Portfolio() {
                   <div className={s.services}>
                     {services.map((x) => (
                       <div key={x.title} className={`${s.service} ${s[x.variant]}`}>
-                        <span className={s.serviceIcon}>{x.icon}</span>
                         <h3 className={s.serviceTitle}>{x.title}</h3>
                         <p className={s.serviceBody}>{x.body}</p>
                       </div>
@@ -139,8 +142,8 @@ export default function Portfolio() {
                     {jobs.map((j, i) => (
                       <div key={j.company} className={s.job}>
                         <div className={s.rail}>
-                          <span className={s.dot} style={{ background: j.dot }} />
-                          <span className={s.line} style={{ background: i === jobs.length - 1 ? "transparent" : undefined }} />
+                          <span className={`${s.dot} ${j.current ? s.dotCurrent : ""}`} />
+                          {i < jobs.length - 1 && <span className={s.line} />}
                         </div>
                         <div className={s.jobBody}>
                           <div className={s.jobHead}>
@@ -158,16 +161,16 @@ export default function Portfolio() {
 
             {tab === 1 &&
               skillGroups.map((g) => (
-                <section key={g.label} className={s.skillGroup}>
+                <section key={g.label} className={`${s.skillGroup} ${s[g.tone]}`}>
                   <div className={s.groupHead}>
-                    <span className={s.swatch} style={{ background: g.color }} />
+                    <span className={s.swatch} />
                     <span className={s.groupLabel}>{g.label}</span>
                     <span className={s.rule} />
                   </div>
                   <div className={s.skills}>
                     {g.items.map((name) => (
                       <div key={name} className={s.skill}>
-                        <span className={s.skillIcon} style={{ background: g.color, color: g.ink }}>
+                        <span className={s.skillIcon}>
                           {abbr(name)}
                         </span>
                         <span className={s.skillName}>{name}</span>
