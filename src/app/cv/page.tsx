@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import PrintButton from "@/components/PrintButton";
 import { contact, cv } from "@/data/profile";
 import s from "./cv.module.css";
 
@@ -14,12 +12,6 @@ const icon = { width: 13, height: 13, viewBox: "0 0 24 24", fill: "none", stroke
 export default function CvPage() {
   return (
     <div className={s.page}>
-      <div className={s.toolbar}>
-        <Link href="/" className={s.back}>← Portfolio</Link>
-        <span>A4 resume — use the print dialog to save as PDF.</span>
-        <PrintButton className={s.printBtn} />
-      </div>
-
       <main className={s.sheet}>
         <header className={s.head}>
           <div>

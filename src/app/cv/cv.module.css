@@ -23,35 +23,6 @@
 .page a { color: var(--accent); text-decoration: none; }
 .page a:hover { text-decoration: underline; }
 
-/* ---------- Toolbar (screen only) ---------- */
-.toolbar {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  padding: 0.7rem 1rem;
-  background: var(--ink);
-  color: #dfe2e1;
-  font-size: 0.82rem;
-}
-.page .back { color: #dfe2e1; font-weight: 600; }
-.printBtn {
-  font: inherit;
-  font-weight: 600;
-  font-size: 0.8rem;
-  color: var(--ink);
-  background: #ffffff;
-  border: none;
-  border-radius: 6px;
-  padding: 0.45rem 0.9rem;
-  cursor: pointer;
-}
-.printBtn:hover { background: var(--accent-tint); }
-.printBtn:active { transform: translateY(1px); }
-
 /* ---------- Sheet (the A4 page) ---------- */
 .sheet {
   background: var(--paper);
@@ -159,7 +130,6 @@
 /* ---------- Responsive (screen) ---------- */
 @media (max-width: 860px) {
   .sheet { width: 100%; min-height: 0; margin: 0; padding: 24px 20px; box-shadow: none; }
-  .toolbar { flex-direction: column; gap: 0.4rem; text-align: center; }
 }
 @media (max-width: 520px) {
   .head { flex-direction: column; }
@@ -172,7 +142,6 @@
 
 /* ---------- Print ---------- */
 @media print {
-  .toolbar { display: none; }
   .page { background: #ffffff; min-height: 0; }
   .sheet { width: auto; min-height: 0; margin: 0; padding: 0; box-shadow: none; }
   .section, .job, .project, .edu, .skills { break-inside: avoid; }

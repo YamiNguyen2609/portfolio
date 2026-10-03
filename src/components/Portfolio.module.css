@@ -421,7 +421,7 @@
 
 /* ---------- Projects ---------- */
 .projects { display: grid; grid-template-columns: 280px 1fr; gap: 20px; align-items: start; }
-.projectList { display: flex; flex-direction: column; gap: 6px; }
+.projectList { display: flex; flex-direction: column; gap: 6px; position: sticky; top: 0; }
 .projectBtn {
   text-align: left;
   cursor: pointer;
@@ -446,7 +446,9 @@
 .projectOn .projectNum { color: var(--on-accent); }
 .projectOn .projectCompany { color: rgba(255, 255, 255, 0.78); }
 
-.detail { display: flex; flex-direction: column; gap: 14px; }
+.detail { display: flex; flex-direction: column; gap: 14px; scroll-margin-top: 24px; }
+.moduleIndex { font-family: var(--font-mono), monospace; font-size: 11px; font-weight: 600; color: var(--accent-text); letter-spacing: 0.04em; margin-bottom: -8px; }
+.moduleTitle { margin: 0; font-family: var(--font-display), sans-serif; font-weight: 800; font-size: 22px; line-height: 1.1; letter-spacing: -0.02em; }
 .techCard {
   background: var(--accent-soft);
   border: 1px solid #cddff1;
@@ -521,6 +523,7 @@
 }
 @media (max-width: 1099px) {
   .projects { grid-template-columns: 1fr; }
+  .projectList { position: static; }
 }
 @media (max-width: 1023px) {
   .root { flex-direction: column; height: auto; min-height: 100dvh; overflow: visible; }

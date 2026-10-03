@@ -27,7 +27,7 @@ export const contact = {
 
 const ABBR: Record<string, string> = {
   "C#": "C#", JavaScript: "JS", TypeScript: "TS", Dart: "Dt", Python: "Py",
-  ".NET": ".N", ".NET Core": ".N", ".NET Framework 4.6.1": ".N",
+  ".NET": ".N", ".NET Core": ".N", ".NET Framework 4.6.1": ".N", ".NET Framework 4.8": ".N",
   "ASP.NET MVC / Web API": "MV", "ASP.NET Web API": "API", Yii2: "Yi",
   Odoo: "Od", "Odoo 13 Enterprise": "Od", React: "Re", "React Native": "RN",
   "Sencha ExtJS": "Ex", "Sencha ExtJS 7": "Ex", Flutter: "Fl", "Node.js": "No",
@@ -69,9 +69,20 @@ export const skillGroups = [
 
 export const projects = [
   { id: "ix", short: "TDC Legacy / IX-One", company: "Global Vertical Innovations", years: "May 2022 — Present", title: "TDC Legacy / IX-One Exchange Platform",
-    summary: "A large, enterprise-scale C#/.NET platform managing product data, imaging and member workflows for a B2B exchange network.",
-    tech: ["C#", ".NET Framework 4.6.1", "ASP.NET MVC / Web API", "SQL Server", "JWT", "Bitbucket Pipelines"],
-    bullets: ["Maintain and extend the platform across the full release cycle, from dev to production.", "Diagnosed and fixed a critical out-of-memory issue in a production data-ingestion pipeline (Fresh Thyme File Match) that risked taking down nightly product-matching jobs.", "Resolved several P1 incidents in the member-onboarding intake flow — a contact-data mapping bug and the wrong address in auto-generated contracts — then added startup checks to catch similar misconfigurations earlier.", "Built and maintain an automated Formstack-to-Splendid-CRM lead pipeline for onboarding members across AU and UK."] },
+    summary: "Maintained and extended a 33-project .NET Framework 4.8 platform (ASP.NET MVC/Web API, SQL Server, Dapper, ExtJS) that runs the product-data capture lifecycle for SPINS IX-ONE.",
+    tech: ["C#", ".NET Framework 4.8", "ASP.NET MVC / Web API", "SQL Server", "Dapper", "Sencha ExtJS", "JWT", "Bitbucket Pipelines"],
+    bullets: ["Automated member onboarding across Formstack, SplendidCRM, the core platform and the RIVIR API, including lead conversion, account sync and international address mapping.", "Built GS1 Data Hub product matching by Case and Inner-Pack identifiers, with normalized zero-padded matching across all search flows.", "Built automated retailer new-item ingestion and an APL file-match feature, covering both the ExtJS UI and the backend."],
+    // Each module renders as its own card under the project overview. Fill in summary/bullets.
+    modules: [
+      { name: "IX-OCR", summary: "", bullets: [] as string[] },
+      { name: "Data Processing", summary: "", bullets: [] as string[] },
+      { name: "Payment", summary: "", bullets: [] as string[] },
+      { name: "Portal", summary: "", bullets: [] as string[] },
+      { name: "Splendid CRM", summary: "", bullets: [] as string[] },
+      { name: "Splendid Integration", summary: "", bullets: [] as string[] },
+      { name: "Outstanding", summary: "", bullets: [] as string[] },
+      { name: "Automation", summary: "", bullets: [] as string[] },
+    ] },
   { id: "cortex", short: "Cortex", company: "Global Vertical Innovations", years: "May 2022 — Present", title: "Cortex — Marketing Program & Budget Management",
     summary: "Enterprise platform for campaign/program/tactic planning, budget allocation, invoicing and ROI/KPI reporting.",
     tech: ["ASP.NET Web API", ".NET Framework 4.6.1", "Sencha ExtJS 7", "SQL Server", "Aspose", "Sisense", "MongoDB"],
@@ -112,12 +123,12 @@ export const cv = {
       projects: [
         {
           title: "TDC Legacy / IX-One Exchange Platform",
-          tech: "C#, .NET Framework 4.6.1, ASP.NET MVC/Web API, SQL Server, JWT, Bitbucket Pipelines",
+          tech: "C#, .NET Framework 4.8, ASP.NET MVC/Web API, SQL Server, Dapper, Sencha ExtJS, JWT, Bitbucket Pipelines",
           bullets: [
-            "Own maintenance and enhancement of a large enterprise platform that manages product data, imaging, and member workflows for a B2B exchange network, delivering changes across the full release cycle from dev to production.",
-            "Diagnosed and fixed a critical out-of-memory failure in the Fresh Thyme File Match ingestion pipeline, protecting nightly product-matching jobs from going down.",
-            "Resolved multiple P1 incidents in the member-onboarding flow (a contact-data mapping bug and the wrong address in auto-generated contracts), then added startup checks to catch similar misconfigurations earlier.",
-            "Built and maintain an automated Formstack-to-Splendid-CRM lead pipeline that onboards new members across multiple countries (AU/UK).",
+            "Maintained and extended a 33-project .NET Framework 4.8 platform (ASP.NET MVC/Web API, SQL Server, Dapper, ExtJS) that runs the product-data capture lifecycle for SPINS IX-ONE.",
+            "Automated member onboarding across Formstack, SplendidCRM, the core platform and the RIVIR API, including lead conversion, account sync and international address mapping.",
+            "Built GS1 Data Hub product matching by Case and Inner-Pack identifiers, with normalized zero-padded matching across all search flows.",
+            "Built automated retailer new-item ingestion and an APL file-match feature, covering both the ExtJS UI and the backend.",
           ],
         },
         {

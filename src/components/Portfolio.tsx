@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { abbr, contact, jobs, projects, services, skillGroups } from "@/data/profile";
 import s from "./Portfolio.module.css";
@@ -13,6 +12,7 @@ export default function Portfolio() {
   const [visible, setVisible] = useState(true);
   const [pid, setPid] = useState(projects[0].id);
   const panel = useRef<HTMLDivElement>(null);
+  const detail = useRef<HTMLDivElement>(null);
   const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   useEffect(() => () => clearTimeout(timer.current), []);
@@ -70,13 +70,13 @@ export default function Portfolio() {
               <span className={s.contactValue}>{contact.location}</span>
             </span>
           </div>
-          <Link href="/cv" className={`${s.contact} ${s.cvLink}`}>
+          <a href="/cv" target="_blank" rel="noopener noreferrer" className={`${s.contact} ${s.cvLink}`}>
             <span className={s.contactIcon}>CV</span>
             <span className={s.contactText}>
               <span className={s.contactLabel}>RESUME</span>
               <span className={s.contactValue}>View printable CV →</span>
             </span>
-          </Link>
+          </a>
         </div>
 
         <div className={s.socials}>
@@ -187,7 +187,10 @@ export default function Portfolio() {
                     <button
                       key={p.id}
                       className={`${s.projectBtn} ${p.id === pid ? s.projectOn : ""}`}
-                      onClick={() => setPid(p.id)}
+                      onClick={() => {
+                        setPid(p.id);
+                        detail.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+                      }}
                     >
                       <span className={s.projectNum}>{String(i + 1).padStart(2, "0")}</span>
                       <span className={s.projectShort}>{p.short}</span>
@@ -196,7 +199,7 @@ export default function Portfolio() {
                   ))}
                 </div>
 
-                <div className={s.detail}>
+                <div ref={detail} className={s.detail}>
                   <div className={s.techCard}>
                     <div className={s.techHead}>
                       <span>LANGUAGES &amp; TECH</span>
@@ -225,6 +228,22 @@ export default function Portfolio() {
                       ))}
                     </div>
                   </div>
+                  {cur.modules?.map((m, i) => (
+                    <div key={m.name} className={s.detailCard}>
+                      <h4 className={s.moduleTitle}>{m.name}</h4>
+                      {m.summary && <p className={s.detailSummary}>{m.summary}</p>}
+                      {m.bullets.length > 0 && (
+                        <div className={s.bullets}>
+                          {m.bullets.map((b) => (
+                            <div key={b} className={s.bullet}>
+                              <span className={s.bulletMark} />
+                              <span>{b}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ))}
                 </div>
               </div>
             )}
