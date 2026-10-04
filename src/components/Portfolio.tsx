@@ -101,39 +101,34 @@ export default function Portfolio() {
 
         <div className={s.contacts}>
           <a href={`mailto:${contact.email}`} className={s.contact}>
-            <span className={s.contactIcon}>@</span>
+            <span className={s.contactIcon}><Image src={contact.icons.email} alt="" width={18} height={18} /></span>
             <span className={s.contactText}>
               <span className={s.contactLabel}>EMAIL</span>
               <span className={s.contactValue}>{contact.email}</span>
             </span>
           </a>
           <a href={contact.phoneHref} className={s.contact}>
-            <span className={s.contactIcon}>☏</span>
+            <span className={s.contactIcon}><Image src={contact.icons.phone} alt="" width={18} height={18} /></span>
             <span className={s.contactText}>
               <span className={s.contactLabel}>PHONE</span>
               <span className={s.contactValue}>{contact.phone}</span>
             </span>
           </a>
           <div className={`${s.contact} ${s.static}`}>
-            <span className={s.contactIcon}>⌖</span>
+            <span className={s.contactIcon}><Image src={contact.icons.location} alt="" width={18} height={18} /></span>
             <span className={s.contactText}>
               <span className={s.contactLabel}>LOCATION</span>
               <span className={s.contactValue}>{contact.location}</span>
             </span>
           </div>
-          <a href="/cv" target="_blank" rel="noopener noreferrer" className={`${s.contact} ${s.cvLink}`}>
-            <span className={s.contactIcon}>CV</span>
-            <span className={s.contactText}>
-              <span className={s.contactLabel}>RESUME</span>
-              <span className={s.contactValue}>View printable CV →</span>
-            </span>
-          </a>
         </div>
 
         <div className={s.socials}>
           {contact.socials.map((x) => (
-            <a key={x.title} href={x.href} title={x.title} className={s.social} style={{ color: x.color, background: x.background }}>
-              {x.label}
+            <a key={x.title} href={x.href} title={x.title} target="_blank" rel="noopener noreferrer" className={s.social} style={{ color: x.color, background: x.background }}>
+              <Image src={x.icon} alt="" width={18} height={18} className={x.mobileIcon ? s.desktopOnly : undefined} />
+              {x.mobileIcon && <Image src={x.mobileIcon} alt="" width={18} height={18} className={s.mobileOnly} />}
+              <span className={s.socialLabel}>{x.label}</span>
             </a>
           ))}
         </div>
@@ -171,7 +166,7 @@ export default function Portfolio() {
                     I keep enterprise .NET systems <span className={s.mark}>running</span> — and make them better.
                   </h2>
                   <p className={s.lead}>
-                    7+ years in design, software development, support and system administration. I’ve delivered software and web projects for clients of different scales — logistics, HR, education and B2B retail — in C#, JavaScript, Python and Dart. <br/>My motto: <strong>never give up.</strong>
+                    7+ years in design, software development, support and system administration. I’ve delivered software and web projects for clients of different scales — logistics, HR, education and B2B retail — in C#, JavaScript, and Python. <br/>My motto: <strong>never give up.</strong>
                   </p>
                 </section>
 

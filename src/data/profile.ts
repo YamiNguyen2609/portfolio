@@ -1,5 +1,12 @@
 import type { StaticImageData } from "next/image";
 import avatarImage from "./images/chibi-avatar.png";
+import cvLogo from "./images/cv-logo.png";
+import emailLogo from "./images/email-logo.png";
+import githubLogo from "./images/github-logo.png";
+import locationLogo from "./images/location-logo.png";
+import linkedinLogo from "./images/linkedin-logo.png";
+import resumeLogo from "./images/resume-logo.png";
+import phoneLogo from "./images/smartphone-logo.png";
 
 // Single source of truth for the portfolio (/) and the printable CV (/cv).
 
@@ -13,11 +20,13 @@ export const contact = {
   // Set to null to fall back to the "NT" initials.
   avatar: avatarImage as StaticImageData | null,
   location: "Binh Tan, Ho Chi Minh City",
+  icons: { email: emailLogo, phone: phoneLogo, location: locationLogo },
   cvLocation: "Ho Chi Minh City, Vietnam",
   // Replace "#" with your real profile URLs.
   socials: [
-    { label: "GITHUB", title: "GitHub", href: "https://github.com/YamiNguyen2609", color: "#FFF", background: "#181717" },
-    { label: "LINKEDIN", title: "LinkedIn", href: "https://www.linkedin.com/in/nguyen-truong-thuan/", color: "#FFF", background: "#0077B5" },
+    { label: "RESUME", title: "Resume", href: "/cv", color: "#FFF", background: "#2f6699", icon: resumeLogo, mobileIcon: cvLogo },
+    { label: "GITHUB", title: "GitHub", href: "https://github.com/YamiNguyen2609", color: "#FFF", background: "#181717", icon: githubLogo },
+    { label: "LINKEDIN", title: "LinkedIn", href: "https://www.linkedin.com/in/nguyen-truong-thuan/", color: "#FFF", background: "#0077B5", icon: linkedinLogo },
   ],
 };
 
@@ -26,7 +35,7 @@ export const contact = {
 --------------------------------------------------------- */
 
 const ABBR: Record<string, string> = {
-  "C#": "C#", JavaScript: "JS", TypeScript: "TS", Dart: "Dt", Python: "Py",
+  "C#": "C#", JavaScript: "JS", TypeScript: "TS", Python: "Py",
   ".NET": ".N", ".NET Core": ".N", ".NET Framework 4.6.1": ".N", ".NET Framework 4.8": ".N",
   "ASP.NET MVC / Web API": "MV", "ASP.NET Web API": "API", Yii2: "Yi",
   Odoo: "Od", "Odoo 13 Enterprise": "Od", React: "Re", "React Native": "RN",
@@ -53,7 +62,7 @@ export const services: { icon: string; title: string; body: string; variant: Var
 ];
 
 export const jobs = [
-  { company: "Global Vertical Innovations, LLC", dates: "May 2022 — Present", projects: "TDC Legacy / IX-One · Cortex", current: true },
+  { company: "Global Vertical Innovations, LLC", dates: "May 2022 — Present", projects: "TDC Legacy · Cortex", current: true },
   { company: "SB&P Logistics", dates: "Dec 2019 — Mar 2022", projects: "Billing Retrieval · Courier & Warehouse apps · HRMS", current: false },
   { company: "AdwardSoft", dates: "Jan 2019 — Dec 2019", projects: "CSI Center Management", current: false },
 ];
@@ -68,7 +77,7 @@ export const skillGroups = [
 ];
 
 export const projects = [
-  { id: "ix", short: "TDC Legacy / IX-One", company: "Global Vertical Innovations", years: "May 2022 — Present", title: "TDC Legacy / IX-One Exchange Platform",
+  { id: "ix", short: "TDC Legacy", company: "Global Vertical Innovations", years: "May 2022 — Present", title: "TDC Legacy Exchange Platform",
     summary: "Maintained and extended a 33-project .NET Framework 4.8 platform (ASP.NET MVC/Web API, SQL Server, Dapper, ExtJS) that runs the product-data capture lifecycle for SPINS IX-ONE.",
     tech: ["C#", ".NET Framework 4.8", "ASP.NET MVC / Web API", "SQL Server", "Dapper", "Sencha ExtJS", "JWT", "Bitbucket Pipelines"],
     bullets: ["Automated member onboarding across Formstack, SplendidCRM, the core platform and the RIVIR API, including lead conversion, account sync and international address mapping.", "Built GS1 Data Hub product matching by Case and Inner-Pack identifiers, with normalized zero-padded matching across all search flows.", "Built automated retailer new-item ingestion and an APL file-match feature, covering both the ExtJS UI and the backend."],
@@ -122,7 +131,7 @@ export const cv = {
       dates: "May 2022 - Present",
       projects: [
         {
-          title: "TDC Legacy / IX-One Exchange Platform",
+          title: "TDC Legacy Platform",
           tech: "C#, .NET Framework 4.8, ASP.NET MVC/Web API, SQL Server, Dapper, Sencha ExtJS, JWT, Bitbucket Pipelines",
           bullets: [
             "Maintained and extended a 33-project .NET Framework 4.8 platform (ASP.NET MVC/Web API, SQL Server, Dapper, ExtJS) that runs the product-data capture lifecycle for SPINS IX-ONE.",

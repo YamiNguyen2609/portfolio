@@ -146,7 +146,7 @@
   height: 34px;
   flex: none;
   border-radius: 6px;
-  background: var(--accent-soft);
+  background: var(--accent-strong);
   color: var(--accent-text);
   display: flex;
   align-items: center;
@@ -181,11 +181,13 @@
   font-family: var(--font-mono), monospace;
   font-size: 12px;
   font-weight: 700;
-  padding: 0 16px;
+  padding: 0 7px;
+  gap: 8px;
   transition: background 0.3s var(--ease), color 0.3s var(--ease), border-color 0.3s var(--ease), transform 0.3s var(--ease);
 }
 .root .social:hover { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
 .root .social:active { transform: translateY(1px); }
+.mobileOnly { display: none; }
 
 /* ---------- Main ---------- */
 .main { flex: 1; min-width: 0; min-height: 0; display: flex; flex-direction: column; gap: 20px; }
@@ -571,7 +573,11 @@
   .root .static { display: none; }
   .contactText { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
   .socials { margin: 0; width: auto; border: none; padding: 0; gap: 6px; }
-  .root .social { height: 34px; }
+  /* Social buttons collapse to square icons; labels stay for screen readers */
+  .root .social { width: 34px; height: 34px; padding: 0; }
+  .socialLabel { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .desktopOnly { display: none; }
+  .mobileOnly { display: block; }
   .pageTitle { display: none; }
   .topbar { padding: 6px; }
   .tabs { width: 100%; }
