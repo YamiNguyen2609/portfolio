@@ -319,10 +319,11 @@
   --sub: var(--body);
   --icon-bg: var(--accent-soft);
   --icon-fg: var(--accent-text);
-  background: var(--raised);
+  background: var(--surface);
   color: var(--fg);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  box-shadow: var(--shadow);
+  border-radius: 12px;
   padding: 22px;
   display: flex;
   flex-direction: column;

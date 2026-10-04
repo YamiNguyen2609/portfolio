@@ -173,8 +173,7 @@ export default function Portfolio() {
 
                 <section className={s.block}>
                   <span className={s.eyebrow}>WHAT I DO</span>
-                  <div className={`${s.blockBody} ${s.services}`} 
-                       style={{ border: 'unset !important', background: 'unset !important', padding: 'unset !important', boxShadow: 'unset !important' }}>
+                  <div className={s.services}>
                     {services.map((x) => (
                       <div key={x.title} className={`${s.service} ${s[x.variant]}`}>
                         <h3 className={s.serviceTitle}>{x.title}</h3>
@@ -215,8 +214,7 @@ export default function Portfolio() {
                     <span className={s.groupLabel}>{g.label}</span>
                     <span className={s.rule} />
                   </div>
-                  <div className={`${s.blockBody} ${s.skills}`}
-                       style={{ border: 'unset !important', background: 'unset !important', padding: 'unset !important', boxShadow: 'unset !important' }}>
+                  <div className={s.skills}>
                     {g.items.map((name) => (
                       <div key={name} className={s.skill}>
                         <span className={s.skillIcon}>
