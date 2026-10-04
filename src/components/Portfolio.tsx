@@ -62,7 +62,7 @@ export default function Portfolio() {
           ))}
         </div>
       </div>
-      {p.modules?.map((m, i) => (
+      {p.modules?.map((m) => (
         <div key={m.name} className={s.detailCard}>
           <h4 className={s.moduleTitle}>{m.name}</h4>
           {m.summary && <p className={s.detailSummary}>{m.summary}</p>}
@@ -156,23 +156,24 @@ export default function Portfolio() {
         </div>
 
         <div className={s.card}>
-          <span className={s.scallop} />
           <div ref={panel} className={`${s.panel} ${visible ? "" : s.hidden}`}>
             {tab === 0 && (
               <>
                 <section className={s.block}>
                   <span className={s.eyebrow}>OVERVIEW</span>
+                  <div className={s.blockBody}>
                   <h2 className={s.headline}>
                     I keep enterprise .NET systems <span className={s.mark}>running</span> — and make them better.
                   </h2>
                   <p className={s.lead}>
                     7+ years in design, software development, support and system administration. I’ve delivered software and web projects for clients of different scales — logistics, HR, education and B2B retail — in C#, JavaScript, and Python. <br/>My motto: <strong>never give up.</strong>
                   </p>
+                  </div>
                 </section>
 
                 <section className={s.block}>
                   <span className={s.eyebrow}>WHAT I DO</span>
-                  <div className={s.services}>
+                  <div className={`${s.blockBody} ${s.services}`}>
                     {services.map((x) => (
                       <div key={x.title} className={`${s.service} ${s[x.variant]}`}>
                         <h3 className={s.serviceTitle}>{x.title}</h3>
@@ -184,7 +185,7 @@ export default function Portfolio() {
 
                 <section className={s.block}>
                   <span className={s.eyebrow}>EXPERIENCE</span>
-                  <div>
+                  <div className={s.blockBody}>
                     {jobs.map((j, i) => (
                       <div key={j.company} className={s.job}>
                         <div className={s.rail}>
@@ -213,7 +214,7 @@ export default function Portfolio() {
                     <span className={s.groupLabel}>{g.label}</span>
                     <span className={s.rule} />
                   </div>
-                  <div className={s.skills}>
+                  <div className={`${s.blockBody} ${s.skills}`}>
                     {g.items.map((name) => (
                       <div key={name} className={s.skill}>
                         <span className={s.skillIcon}>
