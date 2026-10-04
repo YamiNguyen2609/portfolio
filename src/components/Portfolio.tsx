@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { abbr, contact, jobs, projects, services, skillGroups } from "@/data/profile";
 import s from "./Portfolio.module.css";
 
@@ -11,6 +11,8 @@ export default function Portfolio() {
   const [tab, setTab] = useState(0);
   const [visible, setVisible] = useState(true);
   const [pid, setPid] = useState(projects[0].id);
+  // Mobile accordion: which project is expanded (null = all collapsed)
+  const [openId, setOpenId] = useState<string | null>(projects[0].id);
   const panel = useRef<HTMLDivElement>(null);
   const detail = useRef<HTMLDivElement>(null);
   const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
@@ -29,6 +31,55 @@ export default function Portfolio() {
   };
 
   const cur = projects.find((p) => p.id === pid)!;
+
+  const projectDetail = (p: (typeof projects)[number]) => (
+    <>
+      <div className={s.techCard}>
+        <div className={s.techHead}>
+          <span>LANGUAGES &amp; TECH</span>
+          <span>
+            {p.company} · {p.years}
+          </span>
+        </div>
+        <div className={s.techList}>
+          {p.tech.map((name) => (
+            <span key={name} className={s.tech}>
+              <span className={s.techIcon}>{abbr(name)}</span>
+              {name}
+            </span>
+          ))}
+        </div>
+      </div>
+      <div className={s.detailCard}>
+        <h3 className={s.detailTitle}>{p.title}</h3>
+        <p className={s.detailSummary}>{p.summary}</p>
+        <div className={s.bullets}>
+          {p.bullets.map((b) => (
+            <div key={b} className={s.bullet}>
+              <span className={s.bulletMark} />
+              <span>{b}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      {p.modules?.map((m, i) => (
+        <div key={m.name} className={s.detailCard}>
+          <h4 className={s.moduleTitle}>{m.name}</h4>
+          {m.summary && <p className={s.detailSummary}>{m.summary}</p>}
+          {m.bullets.length > 0 && (
+            <div className={s.bullets}>
+              {m.bullets.map((b) => (
+                <div key={b} className={s.bullet}>
+                  <span className={s.bulletMark} />
+                  <span>{b}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
+    </>
+  );
 
   return (
     <div className={s.root}>
@@ -184,66 +235,27 @@ export default function Portfolio() {
               <div className={s.projects}>
                 <div className={s.projectList}>
                   {projects.map((p, i) => (
-                    <button
-                      key={p.id}
-                      className={`${s.projectBtn} ${p.id === pid ? s.projectOn : ""}`}
-                      onClick={() => {
-                        setPid(p.id);
-                        detail.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-                      }}
-                    >
-                      <span className={s.projectNum}>{String(i + 1).padStart(2, "0")}</span>
-                      <span className={s.projectShort}>{p.short}</span>
-                      <span className={s.projectCompany}>{p.company}</span>
-                    </button>
+                    <Fragment key={p.id}>
+                      <button
+                        className={`${s.projectBtn} ${p.id === pid ? s.projectOn : ""}`}
+                        aria-expanded={openId === p.id}
+                        onClick={() => {
+                          setPid(p.id);
+                          setOpenId(openId === p.id ? null : p.id);
+                          detail.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+                        }}
+                      >
+                        <span className={s.projectNum}>{String(i + 1).padStart(2, "0")}</span>
+                        <span className={s.projectShort}>{p.short}</span>
+                        <span className={s.projectCompany}>{p.company}</span>
+                      </button>
+                      {openId === p.id && <div className={`${s.detail} ${s.inlineDetail}`}>{projectDetail(p)}</div>}
+                    </Fragment>
                   ))}
                 </div>
 
-                <div ref={detail} className={s.detail}>
-                  <div className={s.techCard}>
-                    <div className={s.techHead}>
-                      <span>LANGUAGES &amp; TECH</span>
-                      <span>
-                        {cur.company} · {cur.years}
-                      </span>
-                    </div>
-                    <div className={s.techList}>
-                      {cur.tech.map((name) => (
-                        <span key={name} className={s.tech}>
-                          <span className={s.techIcon}>{abbr(name)}</span>
-                          {name}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  <div className={s.detailCard}>
-                    <h3 className={s.detailTitle}>{cur.title}</h3>
-                    <p className={s.detailSummary}>{cur.summary}</p>
-                    <div className={s.bullets}>
-                      {cur.bullets.map((b) => (
-                        <div key={b} className={s.bullet}>
-                          <span className={s.bulletMark} />
-                          <span>{b}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  {cur.modules?.map((m, i) => (
-                    <div key={m.name} className={s.detailCard}>
-                      <h4 className={s.moduleTitle}>{m.name}</h4>
-                      {m.summary && <p className={s.detailSummary}>{m.summary}</p>}
-                      {m.bullets.length > 0 && (
-                        <div className={s.bullets}>
-                          {m.bullets.map((b) => (
-                            <div key={b} className={s.bullet}>
-                              <span className={s.bulletMark} />
-                              <span>{b}</span>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  ))}
+                <div ref={detail} className={`${s.detail} ${s.sideDetail}`}>
+                  {projectDetail(cur)}
                 </div>
               </div>
             )}
